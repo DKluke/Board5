@@ -7,11 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="icon" type="image/png" href="/img/favicon.png" />
 <link rel="stylesheet"  href="/css/common.css" />
+
 <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
- 
+  #home-button {
+  margin :30px;
+  
+  }
   #table {
 	  td { 
 	    padding     : 10px;
@@ -80,9 +85,9 @@
 	    </tr>
 	    </c:forEach>
 
-
 	  </table>
-
+	    <a id="home-button" class="btn btn-dark btn-sm" role="button" 
+	    href="/" >Home</a>
 	</main>
 </body>
 </html>
