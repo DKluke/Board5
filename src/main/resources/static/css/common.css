@@ -24,7 +24,24 @@
   }
   
  
-  
+    #menu    { 
+     width  : 800px;
+     margin : 30px 0;
+
+     td { 
+	     text-align : center; 
+	     padding : 15px 10px;
+	     background-color :  #111111;
+	     color  : white;
+	     font-weight: bold;
+	     border :1px solid silver;
+
+         &:hover  {
+		    background-color : #c0c0c0 ;
+		    color  : white;
+		 }
+	  }  
+  }
   
   
   
