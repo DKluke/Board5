@@ -34,5 +34,10 @@
 		)
 	</insert>
 
+<select id="boardView" resultType="com.board.domain.BoardVo">
+	 SELECT BNO,TITLE,CONTENT,WRITER, MENU_ID
+	 FROM BOARD
+	 WHERE BNO = #{bno}
+</select>
 
 </mapper>

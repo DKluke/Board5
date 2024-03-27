@@ -14,5 +14,7 @@ public interface BoardMapper {
 
 	void insertBoard(BoardVo boardVo);
 
+	List<BoardVo> boardView(BoardVo boardVo);
+
 
 }

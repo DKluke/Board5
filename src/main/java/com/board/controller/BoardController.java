@@ -1,5 +1,6 @@
 package com.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,25 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();		
 		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
 		return mv;
+	}
+	
+	// /Board/View
+	
+	@RequestMapping("/View")
+	public ModelAndView view(BoardVo boardVo) {
+		
+		List<BoardVo> boardView = boardMapper.boardView(boardVo);
+	
+		
+		ModelAndView mv = new ModelAndView();			
+		mv.addObject("boardView",boardView);
+		
+		// db데이터를 들고 view.jsp로 이동
+		mv.setViewName("board/view");
+		
+		
+		return mv;
+		
 	}
 
 }
