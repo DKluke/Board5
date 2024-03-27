@@ -1,5 +1,6 @@
 package com.board.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,7 +15,16 @@ public interface BoardMapper {
 
 	void insertBoard(BoardVo boardVo);
 
-	List<BoardVo> boardView(BoardVo boardVo);
+	HashMap<String, Object> boardUpdateForm(BoardVo boardVo);
+
+	void boardUpdate(BoardVo boardVo);
+
+	BoardVo getBoard(BoardVo boardVo);
+
+	void incHit(BoardVo boardVo);
+
+
+
 
 
 }

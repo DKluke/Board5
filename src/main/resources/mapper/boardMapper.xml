@@ -34,10 +34,42 @@
 		)
 	</insert>
 
-<select id="boardView" resultType="com.board.domain.BoardVo">
-	 SELECT BNO,TITLE,CONTENT,WRITER, MENU_ID
-	 FROM BOARD
-	 WHERE BNO = #{bno}
+<select id="getBoard" resultType="com.board.domain.BoardVo">
+		SELECT
+			  BNO
+			, MENU_ID
+			, TITLE
+			, WRITER
+			, content
+			, TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE
+			, HIT
+		FROM
+			BOARD
+		WHERE 
+			BNO = #{bno}
+		
 </select>
+
+<select id="boardUpdateForm">
+	SELECT *
+	FROM BOARD
+	WHERE BNO = #{bno}
+</select>
+
+<update id="boardUpdate">
+	UPDATE BOARD
+	SET 
+		TITLE   =#{title}
+		CONTENT =#{content}
+		WRITER  =#{writer}
+	WHERE BNO =#{bno}
+
+</update>
+
+<update id="incHit">
+	UPDATE BOARD
+	SET HIT = HIT+1
+	WHERE BNO = #{bno}
+</update>
 
 </mapper>

@@ -51,10 +51,15 @@ public class BoardController {
 	// /Board/WriteForm?menu_id=MENU01
 	@RequestMapping("/WriteForm")
 	public ModelAndView writeForm(MenuVo menuVo) {
+		//메뉴 목록 조회
+		List<MenuVo>  menuList   =  menuMapper.getMenuList();
+
 		
+		// 넘어온 menu_id를 처리
 		String  menu_id = menuVo.getMenu_id(); 
 		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("menuList",menuList);
 		mv.addObject("menu_id",menu_id);
 		mv.setViewName("board/write");
 		
@@ -65,6 +70,7 @@ public class BoardController {
 	// 넘어오는 menu_id=MENU01, title=aaa,writer=aaa,content=aaa	다 있는게 BoardVo
 	@RequestMapping("/Write")
 	public ModelAndView write(BoardVo boardVo) {
+		
 		//넘어온 값 Board 저장
 		boardMapper.insertBoard(boardVo);
 		
@@ -76,18 +82,32 @@ public class BoardController {
 		return mv;
 	}
 	
-	// /Board/View
+	// /Board/View?bno=1
 	
 	@RequestMapping("/View")
 	public ModelAndView view(BoardVo boardVo) {
 		
-		List<BoardVo> boardView = boardMapper.boardView(boardVo);
+		// 메뉴목록 조회
+		List<MenuVo>  menuList   =  menuMapper.getMenuList();
+		
+		//조회수 증가(현재 BNO의 HIT = HIT+1)
+		boardMapper.incHit(boardVo);
+
+		// BNO로 조회한 게시글
+		BoardVo vo = boardMapper.getBoard(boardVo);
+		
+		//vo.content 안의 \n(엔터) 을 '<br>' 로 바꾼다. 그래야 엔터가 제대로 먹힘
+		String content = vo.getContent(); 
+		if(content != null) {
+			content = content.replace("\n", "<br>");
+			vo.setContent(content);
+		}
 	
-		
 		ModelAndView mv = new ModelAndView();			
-		mv.addObject("boardView",boardView);
+		mv.addObject("vo",vo);
+		mv.addObject("menuList",menuList);
 		
-		// db데이터를 들고 view.jsp로 이동
+		// DB데이터를 들고 view.jsp로 이동
 		mv.setViewName("board/view");
 		
 		
@@ -95,4 +115,29 @@ public class BoardController {
 		
 	}
 
+	// /Board/UpdateForm
+	@RequestMapping("/UpdateForm")
+	public ModelAndView updateForm(BoardVo boardVo) {
+		
+		HashMap<String,Object> map = boardMapper.boardUpdateForm(boardVo);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("vo",map);
+		mv.setViewName("board/updateForm");
+		
+		return mv;
+	}
+	// /Board/Update
+	@RequestMapping("/Update")
+	public ModelAndView update(BoardVo boardVo) {
+		
+		boardMapper.boardUpdate(boardVo);
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("redirect:/board/list");
+		
+		return mv;
+	}
+	
 }
