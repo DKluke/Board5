@@ -12,4 +12,7 @@ public interface BoardMapper {
 
 	List<BoardVo> getBoardList(MenuVo menuVo);
 
+	void insertBoard(BoardVo boardVo);
+
+
 }
