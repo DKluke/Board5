@@ -80,7 +80,8 @@ public class BoardController {
 		
 		String menu_id = boardVo.getMenu_id();
 		
-		ModelAndView mv = new ModelAndView();		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(menu_id);
 		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
 		return mv;
 	}
@@ -136,10 +137,11 @@ public class BoardController {
 	public ModelAndView update(BoardVo boardVo) {
 		
 		boardMapper.boardUpdate(boardVo);
-		int bno = boardVo.getBno();
 		
+		int bno = boardVo.getBno();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject(bno);
+		
 		mv.setViewName("redirect:/Board/View?bno="+bno);
 		
 		return mv;
