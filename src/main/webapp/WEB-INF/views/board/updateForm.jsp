@@ -80,8 +80,8 @@ textarea {
 					<td><textarea name="content"  />${vo.content }</textarea></td>
 				</tr>
 				<tr>
-					<td colspan="4"><input type="submit" value="수정" /> 
-					<input	type="button" value="취소" id="goList" /></td>
+					<td colspan="4"><input class="btn btn-dark btn-sm" type="submit" value="수정" /> 
+					<input	class="btn btn-dark btn-sm" type="button" value="취소" id="goList" /></td>
 				</tr>
 			</table>
 		</form>
