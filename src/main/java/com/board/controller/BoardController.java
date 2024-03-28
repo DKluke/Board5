@@ -136,13 +136,11 @@ public class BoardController {
 	public ModelAndView update(BoardVo boardVo) {
 		
 		boardMapper.boardUpdate(boardVo);
-		
-		String menu_id = boardVo.getMenu_id();
-
+		int bno = boardVo.getBno();
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject(menu_id);
-		mv.setViewName("redirect:/Board/List?menu_id="+ menu_id);
+		mv.addObject(bno);
+		mv.setViewName("redirect:/Board/View?bno="+bno);
 		
 		return mv;
 	}

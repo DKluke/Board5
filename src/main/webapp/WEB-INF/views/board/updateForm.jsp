@@ -91,7 +91,7 @@ textarea {
 	<script>
 		const goListEl = document.getElementById('goList');
 		goListEl.addEventListener('click', function(e) {
-			location.href = '/Board/View?bno=${bno}';
+			location.href = '/Board/View?bno=${vo.bno}';
 		})
 	</script>
 
