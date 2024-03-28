@@ -81,7 +81,7 @@ public class BoardController {
 		String menu_id = boardVo.getMenu_id();
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject(menu_id);
+		//mv.addObject(menu_id);
 		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
 		return mv;
 	}
