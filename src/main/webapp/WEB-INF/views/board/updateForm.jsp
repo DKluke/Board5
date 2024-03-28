@@ -49,6 +49,12 @@ td:not([colspan]):first-child {
 input[readonly] {
 	background: #A0A0A0;
 }
+
+textarea {
+	width: 100%;
+	height: 300px;
+	resize: none;
+}
 </style>
 <script href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 "></script>
@@ -59,7 +65,7 @@ input[readonly] {
 <body>
 	<main>
 		<h2>사용자 상세 정보</h2>
-		<form action="/Board/Update" method="POST">
+		<form action="/Board/Update?bno=${vo.bno}" method="POST">
 			<table>
 				<tr>
 					<td>제목</td>
@@ -67,20 +73,15 @@ input[readonly] {
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td><input type="text" name="writer" value="${vo.writer}"
-						readonly /></td>
-				</tr>
-				<tr>
-					<td>작성시간</td>
-					<td><input type="text" name="regdate" value="${vo.regdate}" readonly /></td>
+					<td><input type="text" name="writer" value="${vo.writer}"/></td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><input type="text" name="content" value="${vo.content}" /></td>
+					<td><textarea name="content"  />${vo.content }</textarea></td>
 				</tr>
 				<tr>
-					<td colspan="4"><input type="submit" value="수정" /> <input
-						type="button" value="취소" id="goList" /></td>
+					<td colspan="4"><input type="submit" value="수정" /> 
+					<input	type="button" value="취소" id="goList" /></td>
 				</tr>
 			</table>
 		</form>
@@ -90,7 +91,7 @@ input[readonly] {
 	<script>
 		const goListEl = document.getElementById('goList');
 		goListEl.addEventListener('click', function(e) {
-			location.href = '/Board/List';
+			location.href = '/Board/View?bno=${bno}';
 		})
 	</script>
 

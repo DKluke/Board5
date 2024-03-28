@@ -1,6 +1,5 @@
 package com.board.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +35,15 @@ public class BoardController {
 
 		// 게시물 목록
 		List<BoardVo> boardList  =  boardMapper.getBoardList( menuVo  ); 
+
 		
-		String menu_id = menuVo.getMenu_id();
+		MenuVo mVo       = menuMapper.getMenu(menuVo.getMenu_id());
+		String menu_id   = mVo.getMenu_id();
+		String menu_name = mVo.getMenu_name();
 
 		ModelAndView  mv         =  new ModelAndView();
 		mv.addObject("menu_id",    menu_id);
+		mv.addObject("menu_name", menu_name);
 		mv.addObject("menuList",   menuList );
 		mv.addObject("boardList",  boardList );
 		mv.setViewName("board/list");
@@ -119,10 +122,11 @@ public class BoardController {
 	@RequestMapping("/UpdateForm")
 	public ModelAndView updateForm(BoardVo boardVo) {
 		
-		HashMap<String,Object> map = boardMapper.boardUpdateForm(boardVo);
+		BoardVo vo = boardMapper.boardUpdateForm(boardVo);
+
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("vo",map);
+		mv.addObject("vo",vo);
 		mv.setViewName("board/updateForm");
 		
 		return mv;
@@ -133,9 +137,27 @@ public class BoardController {
 		
 		boardMapper.boardUpdate(boardVo);
 		
-		ModelAndView mv = new ModelAndView();
+		String menu_id = boardVo.getMenu_id();
+
 		
-		mv.setViewName("redirect:/board/list");
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(menu_id);
+		mv.setViewName("redirect:/Board/List?menu_id="+ menu_id);
+		
+		return mv;
+	}
+	
+	// /Board/Delete?bno=${bno}&menu_id=${menu_id}
+	@RequestMapping("/Delete")
+	public ModelAndView delete(BoardVo boardVo) {
+		
+		boardMapper.deleteBoard(boardVo);
+		
+		String menu_id = boardVo.getMenu_id();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject(menu_id);
+		mv.setViewName("redirect:/Board/List?menu_id="+menu_id);
 		
 		return mv;
 	}

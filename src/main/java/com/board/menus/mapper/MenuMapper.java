@@ -24,6 +24,7 @@ public interface MenuMapper {
 	MenuVo getMenu(String menu_id);
 
 	void updateMenu(MenuVo menuVo);
+
 	
 	/*     UPDATE   MENUS
      SET	  MENU_NAME = #{menu_name},
